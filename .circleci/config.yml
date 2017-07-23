@@ -1,0 +1,61 @@
+#
+# CircleCI 2.0 configuration file
+#
+# 参考: https://circleci.com/docs/2.0/configuration-reference/
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10.1
+      
+    steps:
+      - checkout
+
+      #
+      # キャッシュの復元
+      #
+
+      # node のモジュールだけでなく、公開サイトのリポジトリもキャッシュします。
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - restore_cache:
+          keys:
+          - v1-public-sites-
+
+      #
+      # サイトのビルド
+      #
+
+      - run: npm install
+      - run: npm run build-release
+      - run: npm test
+
+      #
+      # 公開サイトのアップデート
+      #
+
+      # デフォルトではソース自体の deploy key を使ってしまうために公開サイトのリポジトリに
+      # アクセスできないので、公開サイト用の deploy key を別途作って使用しています。
+      # この deploy key はリポジトリ設定の SSH Permissions に登録されています。
+      - add_ssh_keys:
+          fingerprints:
+            - "12:01:5a:a1:05:9f:f4:aa:94:84:68:d0:fe:43:cb:95"
+      - run: scripts/deploy 2018
+
+      #
+      # キャッシュの生成
+      #
+
+      # node のモジュールだけでなく、公開サイトのリポジトリもキャッシュします。
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - save_cache:
+          paths:
+            - tmp/sitetest-public
+          key: v1-public-sites-{{ .BuildNum }}

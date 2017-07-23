@@ -1,0 +1,123 @@
+#!/bin/bash
+#
+# 公開サイトの /$1 以下に public の内容をプッシュします。
+#
+
+# ----------------------------------------------------------------
+#     変数の定義
+# ----------------------------------------------------------------
+
+# デプロイしたいソースのディレクトリ
+source_path=public
+
+# 公開サイトのリポジトリを置く場所
+public_site_path=tmp/sitetest-public
+target="$public_site_path/$1"
+
+# リポジトリの URL
+public_site_repository=git@github.com:wm3/sitetest-public.git
+source_repository=git@github.com:wm3/sitetest-source.git
+
+build_id="${CIRCLE_BUILD_URL:-(unknown)}"
+
+
+function log() {
+    echo "$@" 1>&2
+}
+
+function section() {
+    log
+    log "#"
+    log "#" "$@"
+    log "#"
+}
+
+
+# ----------------------------------------------------------------
+#     バリデーション
+# ----------------------------------------------------------------
+
+# 誤ったリポジトリへのプッシュの回避
+# git の origin と source_repository を比較し、一致しなければ終了します。
+real_source_repository="`git config --get remote.origin.url`"
+if [ "$source_repository" != "$real_source_repository" ]
+then
+    log "Unexpected source repository. $source_repository expected, but got $real_source_repository."
+    exit 1
+fi
+
+
+# ----------------------------------------------------------------
+#     Main process
+# ----------------------------------------------------------------
+
+# コマンドが失敗した時はすぐにエラーを返します。
+set -eu
+
+# CI サービスで SSH 鍵のセットアップができない場合、
+# 環境変数に秘密鍵をセットする事でアップロードできます。
+if [ -n "$PUBLIC_SSH_KEY" ]
+then
+    section "Setting up custom private key to access public repository."
+    (
+        set -x
+        mkdir -p ~/.ssh
+        chmod go-rwx ~/.ssh
+        echo -e "$PUBLIC_SSH_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+    )
+fi
+
+#
+# 1. 公開サイトのリポジトリの用意
+#
+if [ -d "$public_site_path" ]
+then
+    section Updating submodule.
+    (
+        set -x
+        git -C "$public_site_path" fetch --all
+        git -C "$public_site_path" reset --hard origin/master
+    )
+else
+    section Cloning submodule.
+    (
+        set -x
+        mkdir -p "$public_site_path"
+        git clone "$public_site_repository" "$public_site_path"
+    )
+fi
+
+#
+# 2. ビルド結果を公開サイトリポジトリのワーキングコピーに上書き
+#
+# 変更点がなければ何もせずにこのスクリプトを終了します。
+#
+section Committing.
+(
+    set -x
+    git submodule update --init
+    rm -rf "$target"
+    mkdir -p "$target"
+    cp -a "$source_path/." "$target"
+)
+
+if [ -z "`git -C $public_site_path status -s`" ]
+then
+    log No updates found.
+    exit
+fi
+
+#
+# 3. 公開サイトリポジトリにプッシュ
+#
+(
+    set -x
+    cd "$public_site_path"
+    git config --global user.email "wm3@mail.w3ch.jp"
+    git config --global user.name "CircleCI"
+
+    git add --all .
+    git commit -m "build: $build_id"
+    git push origin master:master
+)

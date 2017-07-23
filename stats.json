@@ -1,0 +1,60 @@
+{
+  "assetsByChunkName": {
+    "path---en-page-2": [
+      "path---en-page-2-4ace736bef951005e5d2.js",
+      "path---en-page-2-4ace736bef951005e5d2.js.map"
+    ],
+    "page-component---src-pages-index-js": [
+      "page-component---src-pages-index-js-78f6c181bf6cdd25d689.js",
+      "page-component---src-pages-index-js-78f6c181bf6cdd25d689.js.map"
+    ],
+    "path---en-404-html": [
+      "path---en-404-html-a0e39f21c11f6a62c5ab.js",
+      "path---en-404-html-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "path---en-404": [
+      "path---en-404-a0e39f21c11f6a62c5ab.js",
+      "path---en-404-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "page-component---src-pages-404-js": [
+      "page-component---src-pages-404-js-f555dc6d19c896ccbe44.js",
+      "page-component---src-pages-404-js-f555dc6d19c896ccbe44.js.map"
+    ],
+    "path---page-2": [
+      "path---page-2-4ace736bef951005e5d2.js",
+      "path---page-2-4ace736bef951005e5d2.js.map"
+    ],
+    "path---index": [
+      "path---index-a0e39f21c11f6a62c5ab.js",
+      "path---index-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "commons": [
+      "commons-1d161c9095efc26fc08d.js",
+      "commons-1d161c9095efc26fc08d.js.map"
+    ],
+    "path---404-html": [
+      "path---404-html-a0e39f21c11f6a62c5ab.js",
+      "path---404-html-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "page-component---src-pages-page-2-js": [
+      "page-component---src-pages-page-2-js-a64e46fc97f16290577a.js",
+      "page-component---src-pages-page-2-js-a64e46fc97f16290577a.js.map"
+    ],
+    "app": [
+      "app-ef5a780a2aa0585e0ef1.js",
+      "app-ef5a780a2aa0585e0ef1.js.map"
+    ],
+    "path---en": [
+      "path---en-a0e39f21c11f6a62c5ab.js",
+      "path---en-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "path---404": [
+      "path---404-a0e39f21c11f6a62c5ab.js",
+      "path---404-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "layout-component---index": [
+      "layout-component---index-ed63161ece5c69e7b5f7.js",
+      "layout-component---index-ed63161ece5c69e7b5f7.js.map"
+    ]
+  }
+}

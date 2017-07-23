@@ -8,6 +8,12 @@ Thumbs.db
 .idea
 
 
+# Gatsby directory
+.gatsby-context.js
+.sass-cache/
+public/
+.cache/
+
 #
 # from https://github.com/github/gitignore/blob/master/Node.gitignore
 #

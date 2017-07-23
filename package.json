@@ -4,10 +4,12 @@
   "description": "",
   "scripts": {
     "build": "gatsby build",
+    "release-build": "gatsby build --prefix-paths",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "gatsby develop",
+    "serve": "gatsby serve",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"pages/*.js\" \"utils/*.js\" \"wrappers/*.js\" \"html.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ":"
   },
   "main": "n/a",
   "repository": {
@@ -22,9 +24,9 @@
   },
   "homepage": "https://github.com/wm3/sitetest-source#readme",
   "dependencies": {
-    "axios": "^0.16.2",
-    "gatsby": "^1.3.2",
-    "gatsby-link": "^1.3.2",
-    "gatsby-plugin-react-helmet": "^1.0.1"
+    "axios": "0.16.2",
+    "gatsby": "1.3.2",
+    "gatsby-link": "1.3.2",
+    "gatsby-plugin-react-helmet": "1.0.1"
   }
 }

@@ -1,26 +1,33 @@
 const axios = require('axios')
 const crypto = require('crypto')
 
+//
+// Gatsby でページ構成をカスタマイズしたりするための設定を行います。
+//
+// ### 参考
+//
+// カスタマイズ方法: https://www.gatsbyjs.org/docs/creating-and-modifying-pages/
+// Gatsby Node API: https://www.gatsbyjs.org/docs/node-apis/
+// boundActionCreators: https://www.gatsbyjs.org/docs/bound-action-creators/
+//
 
-// Implement the Gatsby API “onCreatePage”. This is
-// called after every page is created.
+//
+// 各ページオブジェクトが生成された時の処理
+//
 exports.onCreatePage = async ({ page, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+  const { createPage } = boundActionCreators;
 
-  return new Promise((resolve, reject) => {
-    createPage(Object.assign({}, page, {
-      context: Object.assign({}, page.context)
-    }))
+  // 対応する英語ページを生成します。
+  createPage(Object.assign({}, page, {
+    path: `/en${page.path}`
+  }));
 
-    createPage(Object.assign({}, page, {
-      path: `/en${page.path}`,
-      context: Object.assign({}, page.context)
-    }))
-
-    resolve()
-  })
+  return;
 }
 
+//
+// ノードを作る時の処理
+//
 exports.sourceNodes = async ({ boundActionCreators }) => {
   const { createNode } = boundActionCreators
 

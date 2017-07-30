@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# public/$1/(各ページ) という構成でビルドします。
+#
+
+# ----------------------------------------------------------------
+#     変数定義
+# ----------------------------------------------------------------
+
+target="$1"
+
+function log() {
+    echo "$@" 1>&2
+}
+
+
+# ----------------------------------------------------------------
+#     メイン処理
+# ----------------------------------------------------------------
+
+# コマンドが失敗した時はすぐにエラーを返します。
+set -eu
+
+log Building public/$target files.
+(
+    set -x
+    gatsby build --prefix-paths
+    mv public $target
+    mkdir public
+    mv $target public
+)
+
+log Making public/index.html.
+cat > public/index.html <<EOS
+<!DOCTYPE html>
+<title>Redirecting...</title>
+<meta http-equiv="refresh" content="0; url=/$target">
+EOS

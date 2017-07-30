@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# public/ 以下にダミーの index.html だけがある構成でビルドします。
+#
+
+set -xeu
+
+mkdir -p public
+echo No Content. > public/index.html

@@ -1,6 +1,8 @@
 #
 # CircleCI 2.0 configuration file
 #
+# CircleCI からは master ブランチの内容を公開サイトリポジトリへプッシュします。
+# 
 # 参考: https://circleci.com/docs/2.0/configuration-reference/
 #
 version: 2
@@ -9,6 +11,10 @@ jobs:
     docker:
       - image: circleci/node:7.10.1
       
+    filters:
+      branches:
+        only: master
+
     steps:
       - checkout
 

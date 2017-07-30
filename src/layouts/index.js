@@ -1,16 +1,19 @@
 import React from "react"
+import { withRouter } from "react-router"
 import PropTypes from "prop-types"
 import Link from "gatsby-link"
 import Helmet from "react-helmet"
+import { lang } from "../utils/i18n.js"
 
-export default class Template extends React.Component {
+export default withRouter(class Template extends React.Component {
   static propTypes = {
     children: PropTypes.func,
   }
 
   render() {
+    const thisLang = lang(this.props.location)
     return (
-      <div>
+      <div lang={thisLang}>
         <Helmet
           title="Gatsby Default Starter"
           meta={[
@@ -57,4 +60,4 @@ export default class Template extends React.Component {
       </div>
     )
   }
-}
+})

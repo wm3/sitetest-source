@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -xeu
+
+mkdir -p public
+echo No Content. > public/index.html

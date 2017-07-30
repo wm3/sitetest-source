@@ -1,0 +1,9 @@
+# Global settings applied to the whole site.
+# netlify の設置にある Build command は無視されます。
+[build]
+  command = "npm run dummy-build"
+
+# Deploy Preview context: All Deploy Previews
+# will inherit these settings.
+[context.deploy-preview]
+  command = "npm run preview-build"

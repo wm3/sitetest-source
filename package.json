@@ -5,6 +5,8 @@
   "scripts": {
     "build": "gatsby build",
     "release-build": "gatsby build --prefix-paths",
+    "preview-build": "scripts/preview-build",
+    "dummy-build": "scripts/dummy-build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "gatsby develop",
     "serve": "gatsby serve",

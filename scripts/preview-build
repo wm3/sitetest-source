@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#
+# public/2018/(各ページ) という構成でビルドします。
+#
+
+set -xeu
+
+gatsby build --prefix-paths
+mv public 2018
+mkdir public
+mv 2018 public
+cat > public/index.html <<EOS
+<!DOCTYPE html>
+<title>Redirecting...</title>
+<meta http-equiv="refresh" content="0; url=/2018">
+EOS

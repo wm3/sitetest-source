@@ -22,12 +22,12 @@ export default function Index() {
 
 const Text = i18n({
   en: {
-    intro: `Top Page.`,
+    intro: `<b>Top Page.</b>`,
     goToSessionList: `Go to session list`
   },
 
   ja: {
-    intro: `トップページです。`,
-    goToSessionList: `セッションリストへ`
+    intro: `<b>トップページです。</b>`,
+    goToSessionList: `<b>セッションリストへ</b>`
   }
 });

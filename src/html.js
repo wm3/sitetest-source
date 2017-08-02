@@ -1,13 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 export default class HTML extends React.Component {
-  static propTypes = {
-    body: PropTypes.string,
-    headComponents: PropTypes.element.isRequired,
-    postBodyComponents: PropTypes.element.isRequired
-  }
-
   render () {
     return (
       <html>

@@ -1,16 +1,10 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import { lang } from '../utils/i18n.js'
 
 export default withRouter(class Template extends React.Component {
-  static propTypes = {
-    children: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired
-  }
-
   render () {
     const thisLang = lang(this.props.location)
     return (

@@ -1,5 +1,6 @@
-import React from "react"
-import { withRouter } from "react-router"
+/* global __PREFIX_PATHS__, __PATH_PREFIX__ */
+import React from 'react'
+import { withRouter } from 'react-router'
 
 //
 // 国際化対応をするための処理を提供します。
@@ -22,8 +23,7 @@ import { withRouter } from "react-router"
 // import する必要はありません。
 //
 
-const enPrefix = new RegExp("^" + (__PREFIX_PATHS__ ? __PATH_PREFIX__ : "") + "/en(?:/|$)")
-
+const enPrefix = new RegExp('^' + (__PREFIX_PATHS__ ? __PATH_PREFIX__ : '') + '/en(?:/|$)')
 
 // ----------------------------------------------------------------
 //     高レベル API
@@ -53,18 +53,17 @@ const enPrefix = new RegExp("^" + (__PREFIX_PATHS__ ? __PATH_PREFIX__ : "") + "/
  * }
  * 
  */
-export default function i18n(texts) {
-  return withRouter(function({ id, location }) {
-    const ln = lang(location);
-    const local = texts[ln];
-    if (!local) throw new Error(`unexpected lang: ${ln}`);
+export default function i18n (texts) {
+  return withRouter(function ({ id, location }) {
+    const ln = lang(location)
+    const local = texts[ln]
+    if (!local) throw new Error(`unexpected lang: ${ln}`)
 
-    const t = local[id];
-    if (!t) throw new Error(`text not found: ${id}, lang=${ln}`);
-    return (<span>{t}</span>);
-  });
+    const t = local[id]
+    if (!t) throw new Error(`text not found: ${id}, lang=${ln}`)
+    return (<span>{t}</span>)
+  })
 }
-
 
 // ----------------------------------------------------------------
 //     低レベル API
@@ -75,8 +74,8 @@ export default function i18n(texts) {
  *
  * @param {Object} location 
  */
-export function lang(location) {
-  return location.pathname.match(enPrefix) ? "en" : "ja"
+export function lang (location) {
+  return location.pathname.match(enPrefix) ? 'en' : 'ja'
 }
 
 /**
@@ -85,7 +84,7 @@ export function lang(location) {
  * @param {Object} location 
  * @param {string} path 
  */
-export function resolve(location, path) {
+export function resolve (location, path) {
   if (!path.match(/^\//)) throw Error(`path must begin with '/': ${path}`)
-  return lang(location) === "en" ? `/en${path}` : path
+  return lang(location) === 'en' ? `/en${path}` : path
 }

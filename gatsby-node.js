@@ -15,14 +15,12 @@ const crypto = require('crypto')
 // 各ページオブジェクトが生成された時の処理
 //
 exports.onCreatePage = async ({ page, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+  const { createPage } = boundActionCreators
 
   // 対応する英語ページを生成します。
   createPage(Object.assign({}, page, {
     path: `/en${page.path}`
-  }));
-
-  return;
+  }))
 }
 
 //
@@ -34,18 +32,18 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
   const res = await axios.get('https://sessionize.com/api/v2/w6fe60ai/view/all')
 
   createNode({
-    id: "timetable",
+    id: 'timetable',
     children: [],
     parent: `__SOURCE__`,
     // Reserved for plugins who wish to extend other nodes.
-    //fields: Object,
+    // fields: Object,
     internal: {
       contentDigest: crypto.createHash('md5').update(JSON.stringify(res.data)).digest('hex'),
-    //  // Optional media type (https://en.wikipedia.org/wiki/Media_type) to indicate
-    //  // to transformer plugins this node has data they can futher process.
-    //  mediaType: String,
-    //  // A globally unique node type choosen by the plugin owner.
-      type: "Timetable",
+      //  // Optional media type (https://en.wikipedia.org/wiki/Media_type) to indicate
+      //  // to transformer plugins this node has data they can futher process.
+      //  mediaType: String,
+      //  // A globally unique node type choosen by the plugin owner.
+      type: 'Timetable'
     //  // The plugin which created this node.
     //  owner: String,
     //  // Stores which plugins created which fields.
@@ -55,7 +53,5 @@ exports.sourceNodes = async ({ boundActionCreators }) => {
     //  content: String,
     },
     sessions: res.data.sessions
-  });
-
-  return
+  })
 }

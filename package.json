@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "DroidKaigi Site",
   "scripts": {
-    "build": "gatsby build",
-    "build-release": "gatsby build --prefix-paths",
-    "build-preview": "scripts/build-preview 2018",
-    "build-dummy": "scripts/build-dummy",
+    "build": "npm lint && gatsby build",
+    "build-release": "npm lint && gatsby build --prefix-paths",
+    "build-preview": "npm lint && scripts/build-preview 2018",
+    "build-dummy": "npm lint && scripts/build-dummy",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "gatsby develop",
     "serve": "gatsby serve",
+    "lint": "eslint src 'gatsby-*'",
     "format": "eslint --fix src 'gatsby-*'",
     "test": ":"
   },

@@ -25,7 +25,7 @@ jobs:
       # node のモジュールだけでなく、公開サイトのリポジトリもキャッシュします。
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package-local.json" }}
+          - v1-dependencies-{{ checksum "package-lock.json" }}
       - restore_cache:
           keys:
           - v1-public-sites-
@@ -58,7 +58,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package-local.json" }}
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
       - save_cache:
           paths:
             - tmp/sitetest-public

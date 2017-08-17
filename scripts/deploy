@@ -56,14 +56,14 @@ set -eu
 
 # CI サービスで SSH 鍵のセットアップができない場合、
 # 環境変数に秘密鍵をセットする事でアップロードできます。
-if [ -n "$PUBLIC_SSH_KEY" ]
+if [ -n "${PUBLIC_SSH_KEY:-}" ]
 then
     section "Setting up custom private key to access public repository."
     (
         set -x
         mkdir -p ~/.ssh
         chmod go-rwx ~/.ssh
-        echo -e "$PUBLIC_SSH_KEY" > ~/.ssh/id_rsa
+        echo -e "${PUBLIC_SSH_KEY:-}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
     )
 fi

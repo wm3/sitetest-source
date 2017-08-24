@@ -61,5 +61,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package-lock.json" }}
       - save_cache:
           paths:
-            - tmp/sitetest-public
+            - ~/sitetest-public
           key: v1-public-sites-{{ .BuildNum }}

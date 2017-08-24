@@ -11,7 +11,7 @@
 source_path=public
 
 # 公開サイトのリポジトリを置く場所
-public_site_path=tmp/sitetest-public
+public_site_path="$HOME/sitetest-public"
 target="$public_site_path/$1"
 
 # リポジトリの URL
@@ -96,7 +96,6 @@ fi
 section Committing.
 (
     set -x
-    git submodule update --init
     rm -rf "$target"
     mkdir -p "$target"
     cp -a "$source_path/." "$target"

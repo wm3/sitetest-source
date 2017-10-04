@@ -15,7 +15,6 @@ export default function Index () {
         {// <link rel="css" href={CustomCss} />
         }
       </Helmet>
-      <marquee>こんにちは</marquee>
     </div>
   )
 }

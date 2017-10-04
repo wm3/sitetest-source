@@ -7,9 +7,9 @@ export default function Index () {
       <Helmet>
         {// <link rel="css" href={CustomCss} />
         }
-        abc
-        <h1>こんにちは!!!</h1>
       </Helmet>
+      abc
+      <h1><marquee>こんにちは!!!</marquee></h1>
     </div>
   )
 }

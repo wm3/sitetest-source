@@ -8,7 +8,7 @@ export default function Index () {
         {// <link rel="css" href={CustomCss} />
         }
         abc
-        <h1><blink>こんにちは!!!</blink></h1>
+        <h1>こんにちは!!!</h1>
       </Helmet>
     </div>
   )

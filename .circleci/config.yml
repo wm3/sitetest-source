@@ -6,6 +6,21 @@
 # 参考: https://circleci.com/docs/2.0/configuration-reference/
 #
 version: 2
+workflows:
+  version: 2
+  on-commit:
+    jobs:
+      - build
+#  periodically:
+#    jobs:
+#      - sync-external-data
+#    triggers:
+#      - schedule:
+#          cron: "* * * * *"
+#          filters:
+#            branches:
+#              only:
+#                - master
 jobs:
   build:
     docker:
@@ -63,3 +78,9 @@ jobs:
           paths:
             - ~/sitetest-public
           key: v1-public-sites-{{ .BuildNum }}
+  sync-external-data:
+    docker:
+      - image: circleci/node:7.10.1
+      
+    steps:
+      - run: curl -O https://sessionize.com/api/v2/w6fe60ai/view/all
